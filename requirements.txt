@@ -1,0 +1,18 @@
+pandas
+numpy
+yfinance
+fredapi
+scikit-learn
+xgboost
+matplotlib
+seaborn
+lightning
+pytorch-lightning
+PyYAML
+tqdm
+statsmodels
+openpyxl
+--extra-index-url https://download.pytorch.org/whl/cu121
+torch==2.2.0+cu121
+torchvision==0.17.0+cu121
+torchaudio==2.2.0+cu121   
