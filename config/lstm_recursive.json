@@ -1,0 +1,8 @@
+{
+  "seq_len": 132,
+  "layers": 3,
+  "hidden_dim": 36,
+  "lr": 0.0044447541666908135,
+  "batch_size": 32,
+  "epochs": 27
+}

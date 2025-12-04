@@ -1,0 +1,20 @@
+{
+  "model": "LSTM_recursive",
+  "best_params": {
+    "seq_len": 132,
+    "layers": 3,
+    "hidden_dim": 36,
+    "lr": 0.0044447541666908135,
+    "batch_size": 32,
+    "epochs": 27
+  },
+  "metric": {
+    "name": "rmse",
+    "value": 1.7122854526223474
+  },
+  "notes": {
+    "source": "optuna",
+    "trial_id": 1,
+    "description": "Best parameters found via Optuna tuning for monthly recursive forecasting."
+  }
+}

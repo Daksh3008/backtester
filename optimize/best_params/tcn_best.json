@@ -1,0 +1,20 @@
+{
+  "model": "TCN_recursive",
+  "best_params": {
+    "seq_len": 67,
+    "channels": 124,
+    "layers": 7,
+    "lr": 0.0023628864184236428,
+    "batch_size": 128,
+    "epochs": 38
+  },
+  "metric": {
+    "name": "rmse",
+    "value": 1.5715649869548478
+  },
+  "notes": {
+    "source": "optuna",
+    "trial_id": 4,
+    "description": "Best parameters found via Optuna tuning on recursive TCN with mu/logvar price reconstruction."
+  }
+}

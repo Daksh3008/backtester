@@ -21,6 +21,11 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import scripts.train_ridge as RIDGE
 from typing import Dict
+import json
+
+def load_json(path):
+    with open(path, "r") as f:
+        return json.load(f)
 
 
 
@@ -159,9 +164,46 @@ def run_backtest(
         print(f"[INFO] train <= {train_end.date()} | predict {p_start.date()} -> {p_end.date()}")
 
         # ---------------- train models ---------------- #
-        lstm_bundle = LSTM.train_and_get_model(train_df, {"seq_len": seq_len})
-        tcn_bundle = TCN.train_and_get_model(train_df, {"seq_len": seq_len})
-        ridge_bundle = RIDGE.train_and_get_model(train_df, {"alpha": 1.0})
+        # ==== load optimized params ====
+        lstm_cfg = load_json("config/lstm_recursive.json")
+        tcn_cfg = load_json("config/tcn_recursive.json")
+        ridge_cfg = load_json("config/ridge_recursive.json")
+
+        # always enforce correct seq_len for all models
+        # because rolling window logic uses it everywhere
+        seq_len = lstm_cfg["seq_len"]
+
+        # LSTM recursive full params
+        lstm_params = {
+            "seq_len": lstm_cfg["seq_len"],
+            "layers": lstm_cfg["layers"],
+            "hidden_dim": lstm_cfg["hidden_dim"],
+            "lr": lstm_cfg["lr"],
+            "batch_size": lstm_cfg["batch_size"],
+            "epochs": lstm_cfg["epochs"],
+        }
+
+        # TCN recursive params
+        tcn_params = {
+            "seq_len": tcn_cfg["seq_len"],
+            "channels": tcn_cfg["channels"],
+            "layers": tcn_cfg["layers"],
+            "lr": tcn_cfg["lr"],
+            "batch_size": tcn_cfg["batch_size"],
+            "epochs": tcn_cfg["epochs"]
+        }
+
+        # Ridge recursive params
+        ridge_params = {
+            "seq_len": ridge_cfg["seq_len"],
+            "alpha": ridge_cfg["alpha"]
+        }
+
+        # ==== Train with Optuna derived parameters ====
+        lstm_bundle = LSTM.train_and_get_model(train_df, lstm_params)
+        tcn_bundle = TCN.train_and_get_model(train_df, tcn_params)
+        ridge_bundle = RIDGE.train_and_get_model(train_df, ridge_params)
+
 
         # ---------------- predictions ---------------- #
         actuals = df.loc[predict_idx, CLOSE].astype(float)

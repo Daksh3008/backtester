@@ -1,0 +1,8 @@
+{
+  "seq_len": 67,
+  "channels": 124,
+  "layers": 7,
+  "lr": 0.0023628864184236428,
+  "batch_size": 128,
+  "epochs": 38
+}

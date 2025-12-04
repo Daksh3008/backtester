@@ -86,6 +86,7 @@ Planned addition:
 1. `download_data.py`
 2. `prepare_features.py`
 3. `dataset_builder.py`
+optional(run optuna for optimization)
 4. Train models
 5. Monthly recursive prediction
 6. Save excel & MC plots
@@ -99,6 +100,12 @@ commands:
 python -m scripts.download_data
 
 python -m scripts.prepare_features
+
+###optuna hyperparameter tuning
+
+python -m optimize.tune_lstm
+python -m optimize.tune_tcn
+python -m optimize.tune_ridge
 
 
 python -m scripts.rolling_backtest 

@@ -1,0 +1,15 @@
+{
+  "model": "Ridge_recursive",
+  "best_params": {
+    "seq_len": 105,
+    "alpha": 3.9834041203517225
+  },
+  "metric": {
+    "name": "rmse",
+    "value": "best_from_optuna"
+  },
+  "notes": {
+    "source": "optuna",
+    "description": "Best parameters found via Optuna tuning for recursive Ridge model on log returns."
+  }
+}
